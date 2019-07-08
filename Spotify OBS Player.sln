@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29001.49
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spotify OBS Player", "Spotify OBS Player\Spotify OBS Player.csproj", "{DF7FBC69-C366-4690-8EA2-3B30EB1568A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF7FBC69-C366-4690-8EA2-3B30EB1568A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF7FBC69-C366-4690-8EA2-3B30EB1568A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF7FBC69-C366-4690-8EA2-3B30EB1568A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF7FBC69-C366-4690-8EA2-3B30EB1568A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C29C8C1-750E-4812-AEEB-2F4182143EC6}
+	EndGlobalSection
+EndGlobal
