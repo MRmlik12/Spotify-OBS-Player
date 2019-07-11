@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using System.IO;
 using IniParser;
 using IniParser.Model;
+using System.Windows.Forms;
 
 namespace Spotify_OBS_Player.Config
 {
     public class ConfigOperations
     {
         readonly string configName = "config.conf";
+        public bool create = true;
 
         public void CheckConfig()
         {
@@ -25,9 +27,18 @@ namespace Spotify_OBS_Player.Config
 
         private void CreateConfig()
         {
-            var file = File.Create(configName);
-            file.Close();
-            File.WriteAllLines(configName, Lines());
+            try
+            {
+                var file = File.Create(configName);
+                file.Close();
+                File.WriteAllLines(configName, Lines());
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please run again this program with administrator privileges",
+                    "Spotify OBS Player", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                create = false;
+            }
         }
 
         private List<string> Lines()

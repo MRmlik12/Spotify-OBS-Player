@@ -1,0 +1,1 @@
+This application require .NET 4.8 Runtime, where you can download from this link https://dotnet.microsoft.com/download/thank-you/net48\n or check after install "install .NET Framework 4.8"

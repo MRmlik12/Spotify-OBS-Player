@@ -7,7 +7,7 @@
     <ProjectGuid>{DF7FBC69-C366-4690-8EA2-3B30EB1568A1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Spotify_OBS_Player</RootNamespace>
-    <AssemblyName>OBS Spotify Player</AssemblyName>
+    <AssemblyName>Spotify OBS Player</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

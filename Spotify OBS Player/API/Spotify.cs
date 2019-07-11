@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using System.IO;
 using System.Collections.Specialized;
+using Newtonsoft.Json.Schema;
+using Newtonsoft.Json.Linq;
 
 namespace Spotify_OBS_Player.API
 {
@@ -20,6 +22,8 @@ namespace Spotify_OBS_Player.API
         private readonly string clientID = "";
         private readonly string secretID = "";
 
+        public string newToken;
+        public List<string> Artists = new List<string> { };
         public string title = null;
         public string imageUrl = null;
 
@@ -29,11 +33,15 @@ namespace Spotify_OBS_Player.API
             return token;
         }
 
-        public string GetTokenFromJSON(string jsonToken)
+        public string[] GetTokenFromJSON(string jsonToken)
         {
             var deserializer = JsonConvert.DeserializeObject<TokenData.RootObject>(GetToken(jsonToken));
-            string acessToken = deserializer.access_token;
-            return acessToken;
+
+            string[] important = new string[2];
+            important[0] = deserializer.access_token;
+            important[1] = deserializer.refresh_token;
+
+            return important;
         }
 
         private string GetToken(string code)
@@ -52,32 +60,49 @@ namespace Spotify_OBS_Player.API
             return json;            
         }
 
-        public async Task<List<string>> GetCurrentTrackInfo(string token)
+        public async Task<List<string>> GetCurrentTrackInfo(string token, string refreshToken = null)
         {
             var response = await DownloadCurrentTrackInfo(token);
-            var json =
-                JsonConvert.DeserializeObject<TrackInfo.RootObject>(response);
-            while (true)
+            if (response == "")
             {
-                response = await DownloadCurrentTrackInfo(token);
-                json = JsonConvert.DeserializeObject<TrackInfo.RootObject>(response);
-                if (json.is_playing == false)
-                {
-                    MessageBox.Show("Please turn on music!", "OBS Spotify Player", MessageBoxButtons.OK, 
-                        MessageBoxIcon.Information);
-                }
-                else
-                {
-                    break;
-                }
+                MessageBox.Show("Unable to get data from api! Come back later!",
+                    "Spotify OBS Player", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return Artists = null;
             }
-            title = json.item.name;
-            imageUrl = json.item.album.images[0].url;
-            List<string> Artists = new List<string> { };
-            for (int i = 0; i < json.item.artists.Count; i++)
+            else if (response == "get new token")
             {
-                var _arists = json.item.artists[i];
-                Artists.Add(_arists.name);
+                newToken = await RefreshToken(refreshToken);
+                var deserializer = JsonConvert.DeserializeObject<TokenData.RootObject>(newToken);
+                Artists.Add("token");
+                Artists.Add(deserializer.access_token);
+                Artists.Add(deserializer.refresh_token);
+                return Artists;
+            }
+            else
+            {
+                var json =
+                    JsonConvert.DeserializeObject<TrackInfo.RootObject>(response);
+                while (true)
+                {
+                    response = await DownloadCurrentTrackInfo(token);
+                    json = JsonConvert.DeserializeObject<TrackInfo.RootObject>(response);
+                    if (json.is_playing == false)
+                    {
+                        MessageBox.Show("Please turn on music!", "OBS Spotify Player", MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                title = json.item.name;
+                imageUrl = json.item.album.images[0].url;
+                for (int i = 0; i < json.item.artists.Count; i++)
+                {
+                    var _arists = json.item.artists[i];
+                    Artists.Add(_arists.name);
+                }
             }
             return Artists;
         }
@@ -98,7 +123,7 @@ namespace Spotify_OBS_Player.API
             return await json.Content.ReadAsStringAsync();
         }
 
-        public async Task<string> RefreshToken(string oldToken)
+        public async Task<string> RefreshToken(string refreshToken)
         {
             string encode = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{clientID}:{secretID}"));
 
@@ -108,7 +133,7 @@ namespace Spotify_OBS_Player.API
 
             List<string> postparams = new List<string> { };
             postparams.Add("grant_type=refresh_token");
-            postparams.Add("refresh_token=" + oldToken);
+            postparams.Add("refresh_token=" + refreshToken);
             request.Content = new StringContent(string.Join("&", postparams), Encoding.UTF8, "application/x-www-form-urlencoded");
 
             var response = await httpClient.SendAsync(request);
@@ -123,8 +148,14 @@ namespace Spotify_OBS_Player.API
             request.Headers.Add("Authorization", $"Bearer {token}");
 
             var response = await httpClient.SendAsync(request);
-
-            return await response.Content.ReadAsStringAsync();
+            var json = await response.Content.ReadAsStringAsync();
+            if (response.StatusCode == (HttpStatusCode)401)
+            {
+                json = "token";
+                return json;
+            }
+            else
+                return json;
         }
     }
 }

@@ -18,15 +18,17 @@ namespace Spotify_OBS_Player.Forms
     public partial class Playback : Form
     {
         public string token;
-        public Thread thread;
+        public string refreshToken;
+        public Thread thread = null;
         public int updateTime;
+        public bool closeThread = true;
 
         public Playback()
         {
             InitializeComponent();
         }
 
-        private async void Playback_Load(object sender, EventArgs e)
+        private void Playback_Load(object sender, EventArgs e)
         {
             PrivateFontCollection font = new PrivateFontCollection();
             font.AddFontFile("Fonts/Montserrat-Bold.ttf");
@@ -49,12 +51,20 @@ namespace Spotify_OBS_Player.Forms
         {
             Spotify Spotify = new Spotify();
             var artists = await Spotify.GetCurrentTrackInfo(token);
-            Title.Text = Spotify.title;
-            Artist.Text = string.Join(", ", artists);
-            Thumbnail.Load(Spotify.imageUrl);
-            thread = new Thread(this.Update);
-            
-            thread.Start();
+            if (artists == null)
+            {
+                closeThread = false;
+                this.Close();
+            }
+            else
+            {
+                Title.Text = Spotify.title;
+                Artist.Text = string.Join(", ", artists);
+                Thumbnail.Load(Spotify.imageUrl);
+                thread = new Thread(this.Update);
+
+                thread.Start();
+            }
         }
 
         private new async void Update()
@@ -63,7 +73,15 @@ namespace Spotify_OBS_Player.Forms
             {
                 Thread.Sleep(updateTime * 1000);
                 Spotify Spotify = new Spotify();
-                var artists = await Spotify.GetCurrentTrackInfo(token);
+                var artists = await Spotify.GetCurrentTrackInfo(token, refreshToken);
+                if (artists[0] == "token")
+                {
+                    token = artists[1];
+                    refreshToken = artists[2];
+                    artists = await Spotify.GetCurrentTrackInfo(token);
+                }
+                if (artists == null)
+                    this.Close();
                 Title.Invoke(new Action(delegate ()
                 {
                     Title.Text = Spotify.title;
