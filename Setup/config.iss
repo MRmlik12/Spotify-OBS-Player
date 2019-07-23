@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{F6F6BC50-75E1-4BE7-B512-A2D852963BEA}
 AppName=Spotify OBS Player
-AppVersion=0.5b
+AppVersion=0.5.1b
 ;AppVerName=Spotify OBS Player 0.5b
 AppPublisher=MRmlik12
 DefaultDirName={pf}\Spotify OBS Player
@@ -18,7 +18,7 @@ Compression=zip
 SolidCompression=yes
 InfoBeforeFile=C:\Users\Daniel\source\repos\Spotify OBS Player\Setup\info.txt
 PrivilegesRequired=admin
-VersionInfoVersion=0.0.5.0
+VersionInfoVersion=0.0.5.1
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"

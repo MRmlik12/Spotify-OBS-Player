@@ -80,29 +80,33 @@ namespace Spotify_OBS_Player.Forms
                     refreshToken = artists[2];
                     artists = await Spotify.GetCurrentTrackInfo(token);
                 }
-                if (artists == null)
-                    this.Close();
-                Title.Invoke(new Action(delegate ()
+                else if (artists[0] == "False")
+                    Console.WriteLine("Please Turn On Music");
+                else
                 {
-                    Title.Text = Spotify.title;
-                }));
+                    Title.Invoke(new Action(delegate ()
+                    {
+                        Title.Text = Spotify.title;
+                    }));
 
-                Artist.Invoke(new Action(delegate ()
-                {
-                    Artist.Text = string.Join(", ", artists);
-                }));
+                    Artist.Invoke(new Action(delegate ()
+                    {
+                        Artist.Text = string.Join(", ", artists);
+                    }));
 
-                Thumbnail.Invoke(new Action(delegate ()
-                {
-                    Thumbnail.Load(Spotify.imageUrl);
+                    Thumbnail.Invoke(new Action(delegate ()
+                    {
+                        Thumbnail.Load(Spotify.imageUrl);
 
-                }));
+                    }));
+                }
             }
         }
 
         private void Playback_FormClosing(object sender, FormClosingEventArgs e)
         {
-            thread.Abort();
+            if (closeThread == true)
+                thread.Abort();
         }
     }
 }

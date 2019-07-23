@@ -88,8 +88,8 @@ namespace Spotify_OBS_Player.API
                     json = JsonConvert.DeserializeObject<TrackInfo.RootObject>(response);
                     if (json.is_playing == false)
                     {
-                        MessageBox.Show("Please turn on music!", "OBS Spotify Player", MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+                        Artists.Add(false.ToString());
+                        return Artists;
                     }
                     else
                     {
