@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spotify OBS Player", "Spotify OBS Player\Spotify OBS Player.csproj", "{DF7FBC69-C366-4690-8EA2-3B30EB1568A1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7879DCBE-AF46-470E-AECC-7B110421BFA3} = {7879DCBE-AF46-470E-AECC-7B110421BFA3}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.csproj", "{7879DCBE-AF46-470E-AECC-7B110421BFA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,14 @@ Global
 		{DF7FBC69-C366-4690-8EA2-3B30EB1568A1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DF7FBC69-C366-4690-8EA2-3B30EB1568A1}.Release|x86.ActiveCfg = Release|Any CPU
 		{DF7FBC69-C366-4690-8EA2-3B30EB1568A1}.Release|x86.Build.0 = Release|Any CPU
+		{7879DCBE-AF46-470E-AECC-7B110421BFA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7879DCBE-AF46-470E-AECC-7B110421BFA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7879DCBE-AF46-470E-AECC-7B110421BFA3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7879DCBE-AF46-470E-AECC-7B110421BFA3}.Debug|x86.Build.0 = Debug|Any CPU
+		{7879DCBE-AF46-470E-AECC-7B110421BFA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7879DCBE-AF46-470E-AECC-7B110421BFA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7879DCBE-AF46-470E-AECC-7B110421BFA3}.Release|x86.ActiveCfg = Release|Any CPU
+		{7879DCBE-AF46-470E-AECC-7B110421BFA3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

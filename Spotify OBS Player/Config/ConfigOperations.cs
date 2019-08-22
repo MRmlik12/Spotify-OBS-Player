@@ -46,23 +46,54 @@ namespace Spotify_OBS_Player.Config
             List<string> lines = new List<string> { };
             lines.Add("[Config]");
             lines.Add("update_time=10");
-            lines.Add("version=1.0");
+            lines.Add("font_size_title=14");
+            lines.Add("font_size_artists=10");
+            lines.Add("font_color=#FFFFFF");
+            lines.Add("player_color=#292828");
+            lines.Add("version=2.0");
             return lines;
         }
 
-        public int LoadValuesFromConfig()
+        public string[] LoadValuesFromConfig()
         {
             var parser = new FileIniDataParser();
             IniData data = parser.ReadFile(configName);
-            return Convert.ToInt32(data["Config"]["update_time"]);
+            if (data["Config"]["version"].ToString() == "1.0")
+                UpdateConfigFile();
+
+            string[] values = {
+                data["Config"]["update_time"],
+                data["Config"]["font_color"],
+                data["Config"]["player_color"],
+                data["Config"]["font_size_title"],
+                data["Config"]["font_size_artists"]
+            };
+
+            return values;
         }
 
-        public void SaveValuesToConfig(int updateTime)
+        public void SaveValuesToConfig(string value, string ItemName = "UpdateTime")
         {
             var parser = new FileIniDataParser();
             IniData data = parser.ReadFile(configName);
-            data["Config"]["update_time"] = updateTime.ToString();
+            if (ItemName == "UpdateTime")
+                data["Config"]["update_time"] = value;
+            else if (ItemName == "FontColorUpdate")
+                data["Config"]["font_color"] = value;
+            else if (ItemName == "PlayerColorUpdate")
+                data["Config"]["player_color"] = value;
+            else if (ItemName == "FontSizeTitleUpdate")
+                data["Config"]["font_size_title"] = value;
+            else if (ItemName == "FontSizeArtistsUpdate")
+                data["Config"]["font_size_artists"] = value;
             parser.WriteFile(configName, data);
+        }
+
+        private void UpdateConfigFile()
+        {
+            File.Delete(configName);
+            var file = File.Create(configName);
+            File.WriteAllLines(configName, Lines());
         }
     }
 }

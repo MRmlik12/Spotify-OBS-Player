@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{F6F6BC50-75E1-4BE7-B512-A2D852963BEA}
 AppName=Spotify OBS Player
-AppVersion=0.5.1b
+AppVersion=0.6b
 ;AppVerName=Spotify OBS Player 0.5b
 AppPublisher=MRmlik12
 DefaultDirName={pf}\Spotify OBS Player
@@ -18,7 +18,7 @@ Compression=zip
 SolidCompression=yes
 InfoBeforeFile=C:\Users\Daniel\source\repos\Spotify OBS Player\Setup\info.txt
 PrivilegesRequired=admin
-VersionInfoVersion=0.0.5.1
+VersionInfoVersion=0.0.6.0
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -61,7 +61,8 @@ Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\
 Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\Release\Newtonsoft.Json.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\Release\Spotify OBS Player.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\Release\Spotify OBS Player.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\Release\Spotify OBS Player.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\Release\Updater.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\Release\Updater.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\Release\Fonts\*"; DestDir: "{app}/Fonts"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\Release\Runtime\*"; DestDir: "{app}/Runtime"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files

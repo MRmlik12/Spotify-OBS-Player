@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Spotify_OBS_Player.API;
 using System.Threading;
-using IniParser;
-using IniParser.Model;
+using Spotify_OBS_Player.Config;
 
 namespace Spotify_OBS_Player.Forms
 {
@@ -30,16 +29,24 @@ namespace Spotify_OBS_Player.Forms
 
         private void Playback_Load(object sender, EventArgs e)
         {
+            ConfigOperations config = new ConfigOperations();
+            var values = config.LoadValuesFromConfig();
+
             PrivateFontCollection font = new PrivateFontCollection();
             font.AddFontFile("Fonts/Montserrat-Bold.ttf");
             font.AddFontFile("Fonts/Montserrat-Regular.ttf");
-            Title.Font = new Font(font.Families[0], 14, FontStyle.Bold);
-            Artist.Font = new Font(font.Families[0], 10, FontStyle.Regular);
+            Title.Font = new Font(font.Families[0], Convert.ToSingle(values[3]), FontStyle.Bold);
+            Artist.Font = new Font(font.Families[0], Convert.ToSingle(values[4]), FontStyle.Regular);
+    
 
-            var parser = new FileIniDataParser();
-            IniData data = parser.ReadFile("config.conf");
-            updateTime = Convert.ToInt32(data["Config"]["update_time"]);
+            this.BackColor = ColorTranslator.FromHtml(values[2]);
+            Title.BackColor = ColorTranslator.FromHtml(values[2]);
+            Artist.BackColor = ColorTranslator.FromHtml(values[2]);
 
+            Title.ForeColor = ColorTranslator.FromHtml(values[1]);
+            Artist.ForeColor = ColorTranslator.FromHtml(values[1]);
+
+            updateTime = Convert.ToInt32(values[0]);
         }
 
         private void Artist_Click(object sender, EventArgs e)
@@ -50,7 +57,7 @@ namespace Spotify_OBS_Player.Forms
         private async void Playback_Shown(object sender, EventArgs e)
         {
             Spotify Spotify = new Spotify();
-            var artists = await Spotify.GetCurrentTrackInfo(token);
+            var artists = await Spotify.GetCurrentTrackInfo(token, refreshToken);
             if (artists == null)
             {
                 closeThread = false;
@@ -78,8 +85,9 @@ namespace Spotify_OBS_Player.Forms
                 {
                     token = artists[1];
                     refreshToken = artists[2];
-                    artists = await Spotify.GetCurrentTrackInfo(token);
                 }
+                else if (artists == null)
+                    this.Close();
                 else if (artists[0] == "False")
                     Console.WriteLine("Please Turn On Music");
                 else
@@ -104,6 +112,11 @@ namespace Spotify_OBS_Player.Forms
         }
 
         private void Playback_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+        }
+
+        private void Playback_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (closeThread == true)
                 thread.Abort();

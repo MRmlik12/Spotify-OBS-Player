@@ -41,9 +41,9 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.Thumbnail.ErrorImage = ((System.Drawing.Image)(resources.GetObject("Thumbnail.ErrorImage")));
             this.Thumbnail.Image = ((System.Drawing.Image)(resources.GetObject("Thumbnail.Image")));
-            this.Thumbnail.Location = new System.Drawing.Point(0, 0);
+            this.Thumbnail.Location = new System.Drawing.Point(12, 12);
             this.Thumbnail.Name = "Thumbnail";
-            this.Thumbnail.Size = new System.Drawing.Size(126, 125);
+            this.Thumbnail.Size = new System.Drawing.Size(103, 101);
             this.Thumbnail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Thumbnail.TabIndex = 0;
             this.Thumbnail.TabStop = false;
@@ -53,7 +53,7 @@
             this.Title.AutoSize = true;
             this.Title.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.Title.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Title.Location = new System.Drawing.Point(132, 9);
+            this.Title.Location = new System.Drawing.Point(121, 12);
             this.Title.Name = "Title";
             this.Title.Size = new System.Drawing.Size(58, 13);
             this.Title.TabIndex = 1;
@@ -64,7 +64,7 @@
             this.Artist.AutoSize = true;
             this.Artist.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.Artist.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Artist.Location = new System.Drawing.Point(132, 35);
+            this.Artist.Location = new System.Drawing.Point(121, 36);
             this.Artist.Name = "Artist";
             this.Artist.Size = new System.Drawing.Size(30, 13);
             this.Artist.TabIndex = 2;
@@ -84,6 +84,7 @@
             this.Name = "Playback";
             this.Text = "Playback";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Playback_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Playback_FormClosed);
             this.Load += new System.EventHandler(this.Playback_Load);
             this.Shown += new System.EventHandler(this.Playback_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.Thumbnail)).EndInit();

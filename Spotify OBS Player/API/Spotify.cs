@@ -19,8 +19,8 @@ namespace Spotify_OBS_Player.API
     {
         protected readonly string url = "https://api.spotify.com/v1/";
 
-        private readonly string clientID = "";
-        private readonly string secretID = "";
+        private readonly string clientID = "ddbd63299ab241d7ae4f3950da963343";
+        private readonly string secretID = "7bfc3fd8704147918f8020493a0bc134";
 
         public string newToken;
         public List<string> Artists = new List<string> { };
