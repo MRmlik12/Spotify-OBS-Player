@@ -92,21 +92,28 @@ namespace Spotify_OBS_Player.Forms
                     Console.WriteLine("Please Turn On Music");
                 else
                 {
-                    Title.Invoke(new Action(delegate ()
+                    try
                     {
-                        Title.Text = Spotify.title;
-                    }));
+                        Title.Invoke(new Action(delegate ()
+                        {
+                            Title.Text = Spotify.title;
+                        }));
 
-                    Artist.Invoke(new Action(delegate ()
+                        Artist.Invoke(new Action(delegate ()
+                        {
+                            Artist.Text = string.Join(", ", artists);
+                        }));
+
+                        Thumbnail.Invoke(new Action(delegate ()
+                        {
+                            Thumbnail.Load(Spotify.imageUrl);
+
+                        }));
+                    }
+                    catch (InvalidOperationException)
                     {
-                        Artist.Text = string.Join(", ", artists);
-                    }));
 
-                    Thumbnail.Invoke(new Action(delegate ()
-                    {
-                        Thumbnail.Load(Spotify.imageUrl);
-
-                    }));
+                    }
                 }
             }
         }
@@ -119,7 +126,10 @@ namespace Spotify_OBS_Player.Forms
         private void Playback_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (closeThread == true)
+            {
                 thread.Abort();
+            }
+            this.Dispose(true);
         }
     }
 }

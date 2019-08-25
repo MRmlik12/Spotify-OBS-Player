@@ -13,7 +13,7 @@ namespace Spotify_OBS_Player.Update
 {
     public class GetLatestVersion
     {
-        private int versionCode = 3;
+        private int versionCode = 4;
 
         private async Task<string> DownloadLatestInfo()
         {
