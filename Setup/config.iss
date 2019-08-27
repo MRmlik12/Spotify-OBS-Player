@@ -61,8 +61,6 @@ Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\
 Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\Release\Newtonsoft.Json.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\Release\Spotify OBS Player.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\Release\Spotify OBS Player.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\Release\Updater.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\Release\Updater.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\Release\Fonts\*"; DestDir: "{app}/Fonts"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "C:\Users\Daniel\source\repos\Spotify OBS Player\Spotify OBS Player\bin\Release\Runtime\*"; DestDir: "{app}/Runtime"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files

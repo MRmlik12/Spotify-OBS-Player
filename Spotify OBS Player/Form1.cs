@@ -20,6 +20,8 @@ namespace Spotify_OBS_Player
 
         public Form1()
         {
+            DownloadUpdater updater = new DownloadUpdater();
+            updater.CheckUpdater();
             InitializeComponent();
         }
 

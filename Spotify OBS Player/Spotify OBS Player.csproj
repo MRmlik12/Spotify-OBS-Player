@@ -111,8 +111,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Update\DownloadUpdater.cs" />
     <Compile Include="Update\GetLatestVersion.cs" />
     <Compile Include="Update\Latest.cs" />
+    <Compile Include="Update\Updater.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
